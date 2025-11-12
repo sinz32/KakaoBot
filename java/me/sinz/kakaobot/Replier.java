@@ -44,4 +44,26 @@ public class Replier {
         }
     }
 
+    public boolean reply(String room, String msg) {
+        Replier replier = SessionManager.getInstance().get(userId, packageName, room);
+        if (replier == null) return false;
+        replier.reply(msg);
+        return true;
+    }
+
+    public boolean reply(String room, String msg, boolean hideToast) {
+        Replier replier = SessionManager.getInstance().get(userId, packageName, room);
+        if (!hideToast) KakaoTalkListener.toast("No session: " + room);
+        if (replier == null) return false;
+        replier.reply(msg);
+        return true;
+    }
+
+    public boolean markAsRead(String room) {
+        Replier replier = SessionManager.getInstance().get(userId, packageName, room);
+        if (replier == null) return false;
+        replier.markAsRead();
+        return true;
+    }
+
 }
