@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
         noti.setText("알림 접근 권한 부여");
         noti.setOnClickListener(view -> startActivity(new Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)));
         layout.addView(noti);
+
+        TextView txt = new TextView(this);
+        txt.setText("소스 파일 위치 : " + SinZ.SOURCE_PATH);
+        layout.addView(txt);
 
         layout.addView(SinZ.copyright(this));
 
