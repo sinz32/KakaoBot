@@ -2,6 +2,7 @@ package me.sinz.kakaobot;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.ImporterTopLevel;
 import org.mozilla.javascript.ScriptableObject;
 
 import me.sinz.kakaobot.api.Event;
@@ -29,6 +30,21 @@ public class ScriptManager {
             Context.exit();
         }
         Context.exit();
+    }
+
+    public static void compile() {
+        String source = "";
+        Context rhino = Context.enter();
+        try {
+            rhino.setOptimizationLevel(-1);
+            rhino.setLanguageVersion(Context.VERSION_ES6);
+            rhino.setWrapFactory(new PrimitiveWrapFactory());
+            ScriptableObject scope = new ImporterTopLevel();
+            rhino.evaluateString(scope, source, "JavaScript", 1, null);
+            Context.exit();
+        } catch (Exception e) {
+            Context.exit();
+        }
     }
 
 }
